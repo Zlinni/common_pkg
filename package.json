@@ -1,0 +1,37 @@
+{
+  "name": "zlinni_common_pkg",
+  "version": "1.1.6",
+  "description": "个人工具库",
+  "main": "./dist/zlinniTool.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src/zlinniTool.ts --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zlinni/common_pkg.git"
+  },
+  "author": "zlinni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zlinni/common_pkg/issues"
+  },
+  "homepage": "https://github.com/Zlinni/common_pkg#readme",
+  "devDependencies": {
+    "dayjs": "^1.11.7",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.7"
+  },
+  "keywords": [
+    "zlinni",
+    "common_pkg"
+  ],
+  "files": [
+    "/dist",
+    "/README.md",
+    "/package.json"
+  ]
+}

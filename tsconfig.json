@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost",
+      "ES6",
+      "ES2015",
+      "ES2015.Promise",
+      "ES2015.Generator"
+    ]
+  },
+}
