@@ -1,10 +1,11 @@
 {
   "name": "zlinni_common_pkg",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "个人工具库",
   "main": "./dist/zlinniTool.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "build": "tsup src/zlinniTool.ts --minify"
   },
   "repository": {
@@ -18,7 +19,14 @@
   },
   "homepage": "https://github.com/Zlinni/common_pkg#readme",
   "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@types/jest": "^29.4.0",
+    "babel-jest": "^29.3.1",
     "dayjs": "^1.11.7",
+    "jest": "^29.4.2",
+    "ts-jest": "^29.0.5",
+    "ts-node-dev": "^2.0.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.4"
   },

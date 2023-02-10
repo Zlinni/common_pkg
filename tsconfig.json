@@ -11,6 +11,10 @@
       "ES2015",
       "ES2015.Promise",
       "ES2015.Generator"
-    ]
+    ],
+    "types": [
+      "jest"
+    ],
   },
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "src/jest.config.ts"]
 }

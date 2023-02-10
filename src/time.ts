@@ -22,6 +22,18 @@ const chineseWeek = (time:Date):string=>{
 }
 
 /**
+ * 把s转分秒
+ * @param time 秒数 number
+ * @returns eg 02:30
+ */
+const secondToMinSecond = (time: number): string => {
+  const min: number = Math.floor(time / 60);
+  const second: number = Math.floor(time - min * 60);
+  return `${ifLessThanTenAddZero(min)}:${ifLessThanTenAddZero(
+    second
+  )}`;
+};
+/**
  * 返回中文的时间 时效性强
  * 超出今年的年份 返回例子: 2022-1-20
  * 在今年不在本月中 返回例子: 1-20
@@ -80,5 +92,6 @@ const chineseCurrentTime = (time: Date): string => {
 };
 export {
   chineseWeek,
+  secondToMinSecond,
   chineseCurrentTime
 };
