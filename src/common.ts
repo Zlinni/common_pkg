@@ -113,12 +113,11 @@ const createPromiseFn = (
  * @param obj Object
  * @returns formdata
  */
-const createFormData = <T extends Record<string, any>>(obj: T): T => {
-  const formData = new FormData();
-  Object.keys(obj).forEach((key) => {
-    formData.append(key, obj[key]);
-  });
-  return formData as unknown as typeof obj;
+const createFormData = <T extends Record<string, any>>(obj: T):FormData => {
+  return Object.keys(obj).reduce((pre,key)=>{
+    pre.append(key,obj[key])
+    return pre;
+  },new FormData())
 };
 
 /**
@@ -126,19 +125,18 @@ const createFormData = <T extends Record<string, any>>(obj: T): T => {
  * @param obj object
  * @returns map对象
  */
-const createMapper = <T extends Record<string, any>>(obj: T) => {
-  const mapper = new Map();
-  Object.keys(obj).forEach((key) => {
-    mapper.set(key, obj[key]);
-  });
-  return mapper;
+const createMapper = <T extends Record<string, any>>(obj: T):Map<keyof T,T[keyof T]> => {
+  return Object.keys(obj).reduce((pre,key) => {
+    pre.set(key, obj[key]);
+    return pre;
+  },new Map());
 };
 /**
  * 反转Object键值对
  * @param Object 对象
  * @returns
  */
-const reverseObject = <T extends Record<string, any>>(mapper: T) => {
+const reverseObject = <T extends Record<string, any>>(mapper: T):Record<T[keyof T], keyof T> => {
   return Object.keys(mapper).reduce((pre, curKey: keyof T) => {
     pre[mapper[curKey]] = curKey;
     return pre;

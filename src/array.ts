@@ -78,17 +78,17 @@ const arrayGroupBy = <T extends Record<string, any>>(
  * @param inArr string | string[]
  * @returns array + /
  */
-const processArrayWithUnderline = (inArr: string[],inStr:string): string => {
-    if (Array.isArray(inArr)) {
-      if (inArr.length === 0) return "";
-      const str = inArr.reduce((pre, cur) => {
-        return (pre += cur + inStr);
-      }, "");
-      const inStrLen = inStr.length;
-      return str.slice(0, -inStrLen);
-    }
-    return inArr;
-  };
+const processArrayWithUnderline = (inArr: string[], inStr: string): string => {
+  if (Array.isArray(inArr)) {
+    if (inArr.length === 0) return "";
+    const str = inArr.reduce((pre, cur) => {
+      return (pre += cur + inStr);
+    }, "");
+    const inStrLen = inStr.length;
+    return str.slice(0, -inStrLen);
+  }
+  return inArr;
+};
 
 /**
  * 如果在数组里就删除 否则就push
@@ -97,13 +97,26 @@ const processArrayWithUnderline = (inArr: string[],inStr:string): string => {
  * @param method 'push'|'unshift'
  * @returns 操作后的数组
  */
-const addOrDelInArray = <T>(arr:T[],item: T,method?:'push'|'unshift') => {
-    // 有就删除 没有就加入
-    arr.includes(item)
-      ? delSelectedElementFromArray(arr, item)
-      : arr?.[method](item);
-    return arr;
-  };
+const addOrDelInArray = <T>(arr: T[], item: T, method?: "push" | "unshift") => {
+  // 有就删除 没有就加入
+  arr.includes(item)
+    ? delSelectedElementFromArray(arr, item)
+    : arr?.[method](item);
+  return arr;
+};
+/**
+ * 将数组分割成每n份为一组
+ * @param arr 数组
+ * @param size n份
+ * @returns 分割后的数组
+ */
+const sliceArray = <T>(arr: T[], size: number): T[][] => {
+  const res: T[][] = [];
+  for (let i = 0; i < arr.length; i = i + size) {
+    res.push(arr.slice(i, i + size));
+  }
+  return res;
+};
 
 export {
   pickKeyArrFromArrayObject,
@@ -112,5 +125,5 @@ export {
   diffArrDiff,
   arrayGroupBy,
   processArrayWithUnderline,
-  addOrDelInArray
+  addOrDelInArray,
 };
