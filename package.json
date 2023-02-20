@@ -1,6 +1,6 @@
 {
   "name": "zlinni_common_pkg",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "个人工具库",
   "main": "./dist/zlinniTool.js",
   "scripts": {
