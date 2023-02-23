@@ -27,12 +27,12 @@ const delSelectedElementFromArray = <T extends Array<U>, U>(
  * @param arr2 数组2
  * @returns 返回交集
  */
-const diffArrUnion = (arr1: Array<any>, arr2: Array<any>) => {
-  return arr1.reduce((pre, cur) => {
-    const res = arr2.find((item2) => item2 === cur);
-    res && pre.push(res);
-    return pre;
-  }, []);
+const diffArrUnion = <T extends Array<any>>(arr1: T, arr2: T): T => {
+  return arr1.reduce((res, key1) => {
+    const sameKey = arr2.find((key2) => key2 === key1);
+    sameKey && res.push(sameKey);
+    return res;
+  }, [] as unknown as T);
 };
 /**
  * 数组比较差异返回差集
@@ -101,9 +101,10 @@ const addOrDelInArray = <T>(arr: T[], item: T, method?: "push" | "unshift") => {
   // 有就删除 没有就加入
   arr.includes(item)
     ? delSelectedElementFromArray(arr, item)
-    : arr?.[method](item);
+    : arr?.[method ?? "push"](item);
   return arr;
 };
+
 /**
  * 将数组分割成每n份为一组
  * @param arr 数组
@@ -126,4 +127,5 @@ export {
   arrayGroupBy,
   processArrayWithUnderline,
   addOrDelInArray,
+  sliceArray
 };

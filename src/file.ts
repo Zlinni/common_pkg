@@ -39,6 +39,19 @@ const dataURLtoFile = (dataurl: string, filename: string) => {
 };
 
 /**
+ * file或blob 转base64
+ * @param {*} blob file或者blob
+ * @param {*} callback function (data)通过参数获得base64
+ */
+const blobToBase64 = (blob: Blob, callback: (res: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    callback(reader.result as string);
+  });
+  reader.readAsDataURL(blob);
+};
+
+/**
  * 下载url 需要axios!!
  * @param url 链接
  * @param fileName 文件名字
@@ -103,5 +116,5 @@ const convertImage = (file: File): Promise<File> =>
     };
   });
 
-export { downloadFileByBlob, dataURLtoFile
+export { downloadFileByBlob, dataURLtoFile,blobToBase64
  };

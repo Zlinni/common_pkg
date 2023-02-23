@@ -62,13 +62,10 @@ type loopFn = (arg: loopArr[number]) => Promise<any>;
  */
 const awaitLoop = async (taskArr: loopArr, loopFn: loopFn) => {
   try {
-    const num = await loopFn(taskArr.shift());
-    console.log(num);
-    if (num) {
-      awaitLoop(taskArr, loopFn);
-    }
+    if (taskArr.length === 0) return;
+    await loopFn(taskArr.shift());
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error as string);
   }
 };
 
@@ -113,12 +110,14 @@ const createPromiseFn = (
  * @param obj Object
  * @returns formdata
  */
-const createFormData = <T extends Record<string, any>>(obj: T):FormData => {
-  return Object.keys(obj).reduce((pre,key)=>{
-    pre.append(key,obj[key])
+const createFormData = <T extends Record<string, any>>(
+  obj: T
+): Required<T> | T => {
+  return Object.keys(obj).reduce((pre, key) => {
+    pre.append(key, obj[key]);
     return pre;
-  },new FormData())
-};
+  }, new FormData()) as unknown as T;
+};  
 
 /**
  * 根据object返回map对象
