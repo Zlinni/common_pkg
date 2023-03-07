@@ -141,6 +141,23 @@ const reverseObject = <T extends Record<string, any>>(mapper: T):Record<T[keyof 
     return pre;
   }, {} as Record<T[keyof T], keyof T>);
 };
+/**
+ * 获取url中的参数
+ * @param url url
+ * @returns 参数
+ */
+const getUrlSearchToObject = <T>(
+  url = window.location.search
+): Record<keyof T, string> => {
+  const urlStr = url.split("?")[1];
+  const paramsArr = urlStr.split("&");
+  return paramsArr.reduce((pre, cur) => {
+    const arr = cur.split("=");
+    const [key, value] = arr;
+    pre[key as keyof T] = value;
+    return pre;
+  }, {} as Record<keyof T, string>);
+};
 
 
 export {
@@ -154,5 +171,6 @@ export {
   createPromiseFn,
   createFormData,
   createMapper,
-  reverseObject
+  reverseObject,
+  getUrlSearchToObject
 };

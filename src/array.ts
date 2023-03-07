@@ -22,6 +22,16 @@ const delSelectedElementFromArray = <T extends Array<U>, U>(
   return arr;
 };
 /**
+ * 删除数组中指定下标元素 并返回原数组
+ */
+const delSelectedElementFromArrayByIdx = <T extends Array<U>, U>(
+  arr: T,
+  idx: number
+): U[] => {
+  arr.splice(idx, 1);
+  return arr;
+};
+/**
  * 数组比较差异返回交集
  * @param arr1 数组1
  * @param arr2 数组2
@@ -122,10 +132,11 @@ const sliceArray = <T>(arr: T[], size: number): T[][] => {
 export {
   pickKeyArrFromArrayObject,
   delSelectedElementFromArray,
+  delSelectedElementFromArrayByIdx,
   diffArrUnion,
   diffArrDiff,
   arrayGroupBy,
   processArrayWithUnderline,
   addOrDelInArray,
-  sliceArray
+  sliceArray,
 };

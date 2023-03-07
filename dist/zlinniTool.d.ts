@@ -62,13 +62,13 @@ declare const createPromiseFn: (inputMsg: any, outPutMsg: any, errorMsg: any, ti
  * @param obj Object
  * @returns formdata
  */
-declare const createFormData: <T extends Record<string, any>>(obj: T) => T;
+declare const createFormData: <T extends Record<string, any>>(obj: T) => T | Required<T>;
 /**
  * 根据object返回map对象
  * @param obj object
  * @returns map对象
  */
-declare const createMapper: <T extends Record<string, any>>(obj: T) => Map<any, any>;
+declare const createMapper: <T extends Record<string, any>>(obj: T) => Map<keyof T, T[keyof T]>;
 /**
  * 反转Object键值对
  * @param Object 对象
@@ -153,11 +153,19 @@ declare const downloadFileByBlob: (blob: Blob, fileName: string) => void;
  * @returns
  */
 declare const dataURLtoFile: (dataurl: string, filename: string) => File;
+/**
+ * file或blob 转base64
+ * @param {*} blob file或者blob
+ * @param {*} callback function (data)通过参数获得base64
+ */
+declare const blobToBase64: (blob: Blob, callback: (res: string) => void) => void;
 
+declare const file_blobToBase64: typeof blobToBase64;
 declare const file_dataURLtoFile: typeof dataURLtoFile;
 declare const file_downloadFileByBlob: typeof downloadFileByBlob;
 declare namespace file {
   export {
+    file_blobToBase64 as blobToBase64,
     file_dataURLtoFile as dataURLtoFile,
     file_downloadFileByBlob as downloadFileByBlob,
   };
@@ -181,7 +189,7 @@ declare const delSelectedElementFromArray: <T extends U[], U>(arr: T, key: U) =>
  * @param arr2 数组2
  * @returns 返回交集
  */
-declare const diffArrUnion: (arr1: Array<any>, arr2: Array<any>) => any;
+declare const diffArrUnion: <T extends any[]>(arr1: T, arr2: T) => T;
 /**
  * 数组比较差异返回差集
  * @param arr1 数组1
@@ -209,7 +217,14 @@ declare const processArrayWithUnderline: (inArr: string[], inStr: string) => str
  * @param method 'push'|'unshift'
  * @returns 操作后的数组
  */
-declare const addOrDelInArray: <T>(arr: T[], item: T, method?: 'push' | 'unshift') => T[];
+declare const addOrDelInArray: <T>(arr: T[], item: T, method?: "push" | "unshift") => T[];
+/**
+ * 将数组分割成每n份为一组
+ * @param arr 数组
+ * @param size n份
+ * @returns 分割后的数组
+ */
+declare const sliceArray: <T>(arr: T[], size: number) => T[][];
 
 declare const array_addOrDelInArray: typeof addOrDelInArray;
 declare const array_arrayGroupBy: typeof arrayGroupBy;
@@ -218,6 +233,7 @@ declare const array_diffArrDiff: typeof diffArrDiff;
 declare const array_diffArrUnion: typeof diffArrUnion;
 declare const array_pickKeyArrFromArrayObject: typeof pickKeyArrFromArrayObject;
 declare const array_processArrayWithUnderline: typeof processArrayWithUnderline;
+declare const array_sliceArray: typeof sliceArray;
 declare namespace array {
   export {
     array_addOrDelInArray as addOrDelInArray,
@@ -227,6 +243,7 @@ declare namespace array {
     array_diffArrUnion as diffArrUnion,
     array_pickKeyArrFromArrayObject as pickKeyArrFromArrayObject,
     array_processArrayWithUnderline as processArrayWithUnderline,
+    array_sliceArray as sliceArray,
   };
 }
 
